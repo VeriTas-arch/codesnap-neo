@@ -134,17 +134,17 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "npm run compile:extension && npm run compile:webview",
-        "compile:extension": "tsc -p .",
-        "compile:webview": "tsc -p tsconfig.webview.json --noEmit && esbuild webview/src/index.ts --bundle --format=iife --outfile=webview/dist/index.js && npx tailwindcss -i style.css -o ./webview/style.css",
+        "compile": "tsc -p . && npm run compile:webview",
+        "compile:webview": "tsc -p tsconfig.webview.json --noEmit && esbuild webview/src/index.ts --bundle --format=iife --outfile=webview/dist/index.js && npm run build:css",
+        "build:css": "cross-env BROWSERSLIST_IGNORE_OLD_DATA=1 tailwindcss -i style.css -o ./webview/style.css",
         "check": "npm run compile && npm run lint",
-        "lint": "eslint .",
-        "tw": "npx tailwindcss -i style.css -o ./webview/style.css --watch"
+        "lint": "eslint ."
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "@types/node": "^25.9.3",
         "@types/vscode": "^1.120.0",
+        "cross-env": "^10.1.0",
         "esbuild": "^0.28.1",
         "eslint": "^10.5.0",
         "tailwindcss": "^3.4.19",
