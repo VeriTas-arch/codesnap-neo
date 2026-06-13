@@ -2,8 +2,9 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { homedir } from 'os';
 import { readHtml, writeFile, getSettings } from './util';
+import { ExtensionToWebviewMessage, WebviewConfig, WebviewToExtensionMessage } from './protocol';
 
-const getConfig = () => {
+const getConfig = (): WebviewConfig => {
     const editorSettings = getSettings('editor', ['fontLigatures', 'tabSize']);
     const editor = vscode.window.activeTextEditor;
     if (editor) editorSettings.tabSize = editor.options.tabSize;
@@ -37,7 +38,7 @@ const getConfig = () => {
         ...extensionSettings,
         startLine,
         windowTitle
-    };
+    } as WebviewConfig;
 };
 
 const createPanel = async (context: vscode.ExtensionContext): Promise<vscode.WebviewPanel> => {
@@ -73,22 +74,40 @@ const saveImage = async (data: string): Promise<void> => {
 const hasOneSelection = (selections: readonly vscode.Selection[]): boolean =>
     selections && selections.length === 1 && !selections[0].isEmpty;
 
+const isWebviewMessage = (message: unknown): message is WebviewToExtensionMessage => {
+    if (!message || typeof message !== 'object') return false;
+
+    const { type } = message as { type?: unknown };
+    return type === 'save' || type === 'error';
+};
+
 const runCommand = async (context: vscode.ExtensionContext): Promise<void> => {
     const panel = await createPanel(context);
 
     const update = async () => {
         await vscode.commands.executeCommand('editor.action.clipboardCopyWithSyntaxHighlightingAction');
-        panel.webview.postMessage({ type: 'update', ...getConfig() });
+        const message: ExtensionToWebviewMessage = { type: 'update', ...getConfig() };
+        panel.webview.postMessage(message);
     };
 
-    const flash = () => panel.webview.postMessage({ type: 'flash' });
+    const flash = () => {
+        const message: ExtensionToWebviewMessage = { type: 'flash' };
+        panel.webview.postMessage(message);
+    };
 
-    panel.webview.onDidReceiveMessage(async ({ type, data }) => {
-        if (type === 'save') {
+    panel.webview.onDidReceiveMessage(async (message: unknown) => {
+        if (!isWebviewMessage(message)) {
+            vscode.window.showErrorMessage('CodeSnap: Received an unknown webview message.');
+            return;
+        }
+
+        if (message.type === 'save') {
             flash();
-            await saveImage(data);
+            await saveImage(message.data);
+        } else if (message.type === 'error') {
+            vscode.window.showErrorMessage(`CodeSnap: ${message.message}`);
         } else {
-            vscode.window.showErrorMessage(`CodeSnap 📸: Unknown shutterAction "${type}"`);
+            vscode.window.showErrorMessage(`CodeSnap: Unknown webview message "${message.type}"`);
         }
     });
 

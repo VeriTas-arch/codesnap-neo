@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "node16",
+        "target": "es2020",
+        "lib": [
+            "dom",
+            "es2020"
+        ],
+        "strict": true,
+        "moduleResolution": "node16"
+    },
+    "include": [
+        "webview/src/**/*.ts",
+        "src/protocol.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

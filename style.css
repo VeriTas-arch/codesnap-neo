@@ -176,13 +176,44 @@ body {
 }
 
 .line-focus {
-    @apply bg-sky-300/[0.2] relative before:absolute before:-left-3 before:block before:w-1 before:h-full before:bg-sky-500;
+    position: relative;
+    background-color: rgb(125 211 252 / 0.2);
 }
 
 .git-add {
-    @apply bg-green-300/[0.15] relative before:absolute before:-left-3 before:block before:h-full before:w-auto before:text-green-300 before:font-bold before:content-['+'];
+    position: relative;
+    background-color: rgb(134 239 172 / 0.15);
 }
 
 .git-remove {
-    @apply bg-red-300/[0.15] relative before:absolute before:-left-3 before:block before:h-full before:w-auto before:text-red-500 before:font-bold before:content-['-'];
+    position: relative;
+    background-color: rgb(252 165 165 / 0.15);
+}
+
+.line-focus::before,
+.git-add::before,
+.git-remove::before {
+    position: absolute;
+    left: -0.75rem;
+    display: block;
+    height: 100%;
+    font-weight: 700;
+}
+
+.line-focus::before {
+    width: 0.25rem;
+    content: '';
+    background-color: rgb(14 165 233);
+}
+
+.git-add::before {
+    width: auto;
+    content: '+';
+    color: rgb(134 239 172);
+}
+
+.git-remove::before {
+    width: auto;
+    content: '-';
+    color: rgb(239 68 68);
 }
