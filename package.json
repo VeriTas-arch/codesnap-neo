@@ -21,13 +21,10 @@
         "share",
         "polacode",
         "carbon",
-        "codesnap-plus"
+        "codesnap"
     ],
     "categories": [
         "Other"
-    ],
-    "activationEvents": [
-        "onCommand:codesnap-plus.start"
     ],
     "main": "./out/extension.js",
     "contributes": {
