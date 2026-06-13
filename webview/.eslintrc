@@ -1,14 +1,29 @@
 {
-  "extends": ["adpyke-es6", "prettier"],
-  "env": {
-    "browser": true,
-    "node": false
-  },
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "globals": {
-    "acquireVsCodeApi": true,
-    "domtoimage": true
-  }
+    "extends": [
+        "adpyke-es6"
+    ],
+    "env": {
+        "browser": true,
+        "node": false
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "globals": {
+        "acquireVsCodeApi": true,
+        "domtoimage": true
+    },
+    "rules": {
+        "arrow-parens": "off",
+        "comma-dangle": "off",
+        "eol-last": "off",
+        "indent": "off",
+        "keyword-spacing": "off",
+        "no-trailing-spaces": "off",
+        "padded-blocks": "off",
+        "quotes": "off",
+        "semi": "off",
+        "space-before-blocks": "off",
+        "space-before-function-paren": "off"
+    }
 }

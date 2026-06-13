@@ -1,7 +1,6 @@
 {
     "extends": [
-        "adpyke-es6",
-        "prettier"
+        "adpyke-es6"
     ],
     "globals": {
         "ClipboardItem": true
@@ -9,5 +8,15 @@
     "env": {
         "browser": false,
         "node": true
+    },
+    "rules": {
+        "arrow-parens": "off",
+        "comma-dangle": "off",
+        "indent": "off",
+        "operator-linebreak": "off",
+        "quotes": "off",
+        "semi": "off",
+        "space-before-function-paren": "off",
+        "strict": "off"
     }
 }

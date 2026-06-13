@@ -29,7 +29,7 @@
     "activationEvents": [
         "onCommand:codesnap-plus.start"
     ],
-    "main": "./src/extension.js",
+    "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
@@ -136,6 +136,8 @@
         }
     },
     "scripts": {
+        "compile": "tsc -p .",
+        "check": "npm run compile && npm run lint",
         "lint": "eslint .",
         "tw": "npx tailwindcss -i style.css -o ./webview/style.css --watch"
     },

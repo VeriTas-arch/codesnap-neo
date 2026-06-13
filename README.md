@@ -1,7 +1,6 @@
 # CodeSnap-plus
-**(Fork from CodeSnap-luo)**
 
-📸 Take beautiful screenshots of your code in VS Code! 
+📸 Take beautiful screenshots of your code in VS Code!
 And you can hightlight the line just by click the line number.
 
 ![UI](https://raw.githubusercontent.com/huibizhang/CodeSnap-plus/master/examples/ui.png)
@@ -22,7 +21,6 @@ And you can hightlight the line just by click the line number.
   - Show line numbers
   - Many other configuration options
 
-
 ## Basic Usage Instructions
 
 1. Open the command palette (Ctrl+Shift+P on Windows and Linux, Cmd+Shift+P on OS X) and search for `CodeSnap-plus`.
@@ -36,8 +34,8 @@ And you can hightlight the line just by click the line number.
 - If you'd like to bind CodeSnap to a hotkey, open up your keyboard shortcut settings and bind `codesnap-plus.start` to a custom keybinding.
 - If you'd like to copy to clipboard instead of saving, click the image and press the copy keyboard shortcut (defaults are Ctrl+C on Windows and Linux, Cmd+C on OS X), or bind `codesnap.shutterAction` to `copy` in your settings
 
-
 ## Hightlight Usage Instructions
+
 If you want to hightlight the line just click the line number, and the line will be hightlighted.
 
 - Click once: Style **focus**
