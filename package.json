@@ -2,7 +2,7 @@
     "name": "codesnap-neo",
     "displayName": "CodeSnap Neo",
     "description": "📸 Take beautiful screenshots of your code in VS Code! And you can highlight the line just by clicking.",
-    "version": "2.4.3",
+    "version": "2.4.4",
     "repository": {
         "type": "git",
         "url": "https://github.com/VeriTas-arch/codesnap-neo"
@@ -135,9 +135,7 @@
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p . && npm run compile:webview",
-        "compile:webview": "npm run clean:webview && tsc -p tsconfig.webview.json && npm run copy:domtoimage && npm run build:css",
-        "clean:webview": "node -e \"require('fs').rmSync('webview/dist',{recursive:true,force:true})\"",
-        "copy:domtoimage": "node -e \"const fs=require('fs');fs.mkdirSync('webview/dist',{recursive:true});fs.copyFileSync('webview/vendor/dom-to-image-more.min.js','webview/dist/dom-to-image-more.min.js');fs.copyFileSync('webview/vendor/dom-to-image-even-more.LICENSE.txt','webview/dist/dom-to-image-even-more.LICENSE.txt')\"",
+        "compile:webview": "node scripts/prepare-webview-dist.mjs && tsc -p tsconfig.webview.json && npm run build:css",
         "build:css": "cross-env BROWSERSLIST_IGNORE_OLD_DATA=1 tailwindcss -i webview/src/style.css -o ./webview/style.css",
         "check": "npm run compile && npm run lint",
         "lint": "eslint ."

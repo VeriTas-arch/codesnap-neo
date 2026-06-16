@@ -19,49 +19,62 @@ const applyLineHighlight = (lineNode: HTMLElement, lineNumNode: HTMLElement): vo
     lineNumNode.classList.toggle('!text-white', Boolean(nextClass));
 };
 
-const setupLines = (node: HTMLElement, config: WebviewConfig): void => {
+const createLineNumber = (
+    lineNode: HTMLElement,
+    lineNumber: number,
+    showLineNumbers: boolean
+): HTMLDivElement => {
+    const lineNum = document.createElement('div');
+    lineNum.classList.add('line-number');
+    lineNum.classList.toggle('hidden', !showLineNumbers);
+    lineNum.onclick = () => applyLineHighlight(lineNode, lineNum);
+    lineNum.textContent = String(lineNumber);
+    return lineNum;
+};
+
+const appendLineCode = (lineCodeDiv: HTMLDivElement, row: HTMLElement): void => {
+    const spacer = document.createElement('span');
+    spacer.textContent = ' ';
+    row.appendChild(spacer);
+
+    if (row.innerText.trim().length === 1 && row.childNodes.length === 2) {
+        const char = row.innerText.trim();
+
+        const lineCode = document.createElement('span');
+        lineCode.innerHTML = row.innerHTML.split(char).join('');
+        lineCodeDiv.appendChild(lineCode);
+
+        const lineCode1 = document.createElement('span');
+        lineCode1.innerHTML = row.innerHTML.replace(/&nbsp;/igu, '');
+        lineCodeDiv.appendChild(lineCode1);
+        return;
+    }
+
+    const lineCode = document.createElement('span');
+    lineCode.innerHTML = row.innerHTML;
+    lineCodeDiv.appendChild(lineCode);
+};
+
+const renderLine = (row: HTMLElement, lineNumber: number, config: WebviewConfig): void => {
+    const lineNode = document.createElement('div');
+    lineNode.classList.add('line');
+    row.replaceWith(lineNode);
+
+    lineNode.appendChild(createLineNumber(lineNode, lineNumber, config.showLineNumbers));
+
+    const lineCodeDiv = document.createElement('div');
+    lineCodeDiv.classList.add('line-code');
+    appendLineCode(lineCodeDiv, row);
+    lineNode.appendChild(lineCodeDiv);
+};
+
+const renderRows = (node: HTMLElement, config: WebviewConfig): void => {
     $$(':scope > br', node).forEach((row) => (row.outerHTML = '<div>&nbsp;</div>'));
 
     const rows = $$(':scope > div', node);
     setVar('line-number-width', calcTextWidth(rows.length + config.startLine));
 
-    rows.forEach((row, idx) => {
-        const newRow = document.createElement('div');
-        newRow.classList.add('line');
-        row.replaceWith(newRow);
-
-        const lineNum = document.createElement('div');
-        lineNum.classList.add('line-number');
-        lineNum.classList.toggle('hidden', !config.showLineNumbers);
-
-        lineNum.onclick = () => applyLineHighlight(newRow, lineNum);
-        lineNum.textContent = String(idx + 1 + config.startLine);
-        newRow.appendChild(lineNum);
-
-        const span = document.createElement('span');
-        span.textContent = ' ';
-        row.appendChild(span);
-
-        const lineCodeDiv = document.createElement('div');
-        lineCodeDiv.classList.add('line-code');
-
-        if (row.innerText.trim().length === 1 && row.childNodes.length === 2) {
-            const char = row.innerText.trim();
-
-            const lineCode = document.createElement('span');
-            lineCode.innerHTML = row.innerHTML.split(char).join("");
-            lineCodeDiv.appendChild(lineCode);
-
-            const lineCode1 = document.createElement('span');
-            lineCode1.innerHTML = row.innerHTML.replace(/&nbsp;/igu, "");
-            lineCodeDiv.appendChild(lineCode1);
-        } else {
-            const lineCode = document.createElement('span');
-            lineCode.innerHTML = row.innerHTML;
-            lineCodeDiv.appendChild(lineCode);
-        }
-        newRow.appendChild(lineCodeDiv);
-    });
+    rows.forEach((row, idx) => renderLine(row, idx + 1 + config.startLine, config));
 };
 
 const stripInitialIndent = (node: HTMLElement): void => {
@@ -124,18 +137,26 @@ const getClipboardHtml = (clip: DataTransfer | null, plainLines: string[]): stri
     return linesToHtml(plainLines);
 };
 
+const usePlainTextFallback = (node: HTMLElement, plainLines: string[]): void => {
+    node.innerHTML = linesToHtml(plainLines);
+    node.innerHTML = ($('div', node) || node).innerHTML;
+};
+
+const normalizeClipboardHtml = (node: HTMLElement, html: string, plainLines: string[]): void => {
+    node.innerHTML = html;
+    const code = $('div', node) || node;
+    node.style.fontSize = code.style.fontSize;
+    node.style.lineHeight = code.style.lineHeight;
+    node.innerHTML = code.innerHTML;
+    wrapLooseInlineRows(node);
+    if ($$(':scope > div', node).length === 0) {
+        usePlainTextFallback(node, plainLines);
+    }
+};
+
 export const pasteCode = (config: WebviewConfig, clipboard: DataTransfer | null): void => {
     const plainLines = getPlainLines(clipboard);
-    snippetNode.innerHTML = getClipboardHtml(clipboard, plainLines);
-    const code = $('div', snippetNode) || snippetNode;
-    snippetNode.style.fontSize = code.style.fontSize;
-    snippetNode.style.lineHeight = code.style.lineHeight;
-    snippetNode.innerHTML = code.innerHTML;
-    wrapLooseInlineRows(snippetNode);
-    if ($$(':scope > div', snippetNode).length === 0) {
-        snippetNode.innerHTML = linesToHtml(plainLines);
-        snippetNode.innerHTML = ($('div', snippetNode) || snippetNode).innerHTML;
-    }
+    normalizeClipboardHtml(snippetNode, getClipboardHtml(clipboard, plainLines), plainLines);
     stripInitialIndent(snippetNode);
-    setupLines(snippetNode, config);
+    renderRows(snippetNode, config);
 };
