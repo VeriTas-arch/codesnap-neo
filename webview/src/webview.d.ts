@@ -1,10 +1,8 @@
-interface VsCodeApi {
+export interface VsCodeApi {
     postMessage(message: unknown): void;
 }
 
-declare function acquireVsCodeApi(): VsCodeApi;
-
-declare const domtoimage: {
+export interface DomToImage {
     toPng(
         node: HTMLElement,
         options: {
@@ -13,4 +11,4 @@ declare const domtoimage: {
             postProcess(node: HTMLElement): void;
         }
     ): Promise<string>;
-};
+}

@@ -4,6 +4,7 @@ node_modules/**
 test/**
 examples/**
 src/**
+webview/vendor/**
 webview/src/**
 .gitignore
 tsconfig.json

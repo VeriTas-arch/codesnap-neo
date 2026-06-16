@@ -1,5 +1,9 @@
 import { $, $$, redraw, once, setVar } from './util.js';
-import { WebviewConfig } from '../../src/protocol';
+import type { DomToImage, VsCodeApi } from './webview.js';
+import type { WebviewConfig } from './protocol.js';
+
+declare const domtoimage: DomToImage;
+declare function acquireVsCodeApi(): VsCodeApi;
 
 const vscode = acquireVsCodeApi();
 const windowNode = $('#window');

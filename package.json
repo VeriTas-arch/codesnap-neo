@@ -135,8 +135,9 @@
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p . && npm run compile:webview",
-        "compile:webview": "tsc -p tsconfig.webview.json --noEmit && esbuild webview/src/index.ts --bundle --format=iife --outfile=webview/dist/index.js && npm run copy:domtoimage && npm run build:css",
-        "copy:domtoimage": "node -e \"require('fs').copyFileSync('node_modules/dom-to-image-even-more/dist/dom-to-image-more.min.js','webview/dist/dom-to-image-more.min.js')\"",
+        "compile:webview": "npm run clean:webview && tsc -p tsconfig.webview.json && npm run copy:domtoimage && npm run build:css",
+        "clean:webview": "node -e \"require('fs').rmSync('webview/dist',{recursive:true,force:true})\"",
+        "copy:domtoimage": "node -e \"const fs=require('fs');fs.mkdirSync('webview/dist',{recursive:true});fs.copyFileSync('webview/vendor/dom-to-image-more.min.js','webview/dist/dom-to-image-more.min.js');fs.copyFileSync('webview/vendor/dom-to-image-even-more.LICENSE.txt','webview/dist/dom-to-image-even-more.LICENSE.txt')\"",
         "build:css": "cross-env BROWSERSLIST_IGNORE_OLD_DATA=1 tailwindcss -i style.css -o ./webview/style.css",
         "check": "npm run compile && npm run lint",
         "lint": "eslint ."
@@ -146,11 +147,9 @@
         "@types/node": "^25.9.3",
         "@types/vscode": "^1.120.0",
         "cross-env": "^10.1.0",
-        "esbuild": "^0.28.1",
         "eslint": "^10.5.0",
         "tailwindcss": "^3.4.19",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.61.0",
-        "dom-to-image-even-more": "^1.0.4"
+        "typescript-eslint": "^8.61.0"
     }
 }

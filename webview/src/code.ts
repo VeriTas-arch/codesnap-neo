@@ -1,5 +1,5 @@
 import { $, $$, setVar, calcTextWidth } from './util.js';
-import { WebviewConfig } from '../../src/protocol';
+import type { WebviewConfig } from './protocol.js';
 
 const snippetNode = $('#snippet');
 const HIGHLIGHT_CLASSES = ['line-focus', 'git-add', 'git-remove'];

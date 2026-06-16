@@ -1,7 +1,7 @@
 import { $, $$, setVar } from './util.js';
 import { pasteCode } from './code.js';
 import { takeSnap, cameraFlashAnimation } from './snap.js';
-import { WebviewConfig } from '../../src/protocol';
+import type { WebviewConfig } from './protocol.js';
 
 const navbarNode = $('#navbar');
 const windowControlsNode = $('#window-controls');
