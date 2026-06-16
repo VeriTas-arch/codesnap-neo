@@ -97,6 +97,25 @@ const linesToHtml = (lines: string[]): string =>
         .map((line) => `<div>${escapeHtml(line)}</div>`)
         .join('')}</div>`;
 
+const wrapLooseInlineRows = (node: HTMLElement): void => {
+    if ($$(':scope > div', node).length > 0 || $$(':scope > br', node).length === 0) return;
+
+    const rows: HTMLDivElement[] = [];
+    let row = document.createElement('div');
+
+    Array.from(node.childNodes).forEach((child) => {
+        if (child instanceof HTMLBRElement) {
+            rows.push(row);
+            row = document.createElement('div');
+            return;
+        }
+
+        row.appendChild(child);
+    });
+    rows.push(row);
+    node.replaceChildren(...rows);
+};
+
 const getClipboardHtml = (clip: DataTransfer | null, plainLines: string[]): string => {
     if (!clip) return linesToHtml(plainLines);
 
@@ -112,7 +131,8 @@ export const pasteCode = (config: WebviewConfig, clipboard: DataTransfer | null)
     snippetNode.style.fontSize = code.style.fontSize;
     snippetNode.style.lineHeight = code.style.lineHeight;
     snippetNode.innerHTML = code.innerHTML;
-    if ($$(':scope > div', snippetNode).length !== plainLines.length) {
+    wrapLooseInlineRows(snippetNode);
+    if ($$(':scope > div', snippetNode).length === 0) {
         snippetNode.innerHTML = linesToHtml(plainLines);
         snippetNode.innerHTML = ($('div', snippetNode) || snippetNode).innerHTML;
     }
