@@ -1,14 +1,14 @@
 # CodeSnap Neo
 
 📸 Take beautiful screenshots of your code in VS Code!
-And you can hightlight the line just by click the line number.
+And you can highlight the line just by clicking the line number.
 
 <!-- TOC -->
 
 - [CodeSnap Neo](#codesnap-neo)
     - [Features](#features)
     - [Basic Usage Instructions](#basic-usage-instructions)
-    - [Hightlight Usage Instructions](#hightlight-usage-instructions)
+    - [Highlight Usage Instructions](#highlight-usage-instructions)
     - [Examples](#examples)
     - [Configuration](#configuration)
     - [Acknowledgements](#acknowledgements)
@@ -19,13 +19,13 @@ And you can hightlight the line just by click the line number.
 
 ## Features
 
-- Can hightlight the line if you click line number
-- hightlight have 3 styles:
+- Can highlight the line if you click line number
+- Highlight has 3 styles:
     - focus
     - git-add
     - git-remove
 
-(For usage, can see the **Hightlight Usage Instructions**)
+(For usage, see the **Highlight Usage Instructions**)
 
 - **Original features of CodeSnap**
     - Quickly save screenshots of your code
@@ -37,8 +37,7 @@ And you can hightlight the line just by click the line number.
 
 1. Open the command palette (Ctrl+Shift+P on Windows and Linux, Cmd+Shift+P on OS X) and search for `CodeSnap Neo`.
 2. Select the code you'd like to screenshot.
-3. Adjust the width of the screenshot if desired.
-4. Click the shutter button to save the screenshot to your disk.
+3. Click the shutter button to save the screenshot to your disk.
 
 **Tips**:
 
@@ -46,9 +45,9 @@ And you can hightlight the line just by click the line number.
 - If you'd like to bind CodeSnap to a hotkey, open up your keyboard shortcut settings and bind `codesnap-neo.start` to a custom keybinding.
 - If you'd like to copy to clipboard instead of saving, click the image and press the copy keyboard shortcut (defaults are Ctrl+C on Windows and Linux, Cmd+C on OS X), or bind `codesnap-neo.shutterAction` to `copy` in your settings
 
-## Hightlight Usage Instructions
+## Highlight Usage Instructions
 
-If you want to hightlight the line just click the line number, and the line will be hightlighted.
+If you want to highlight the line, click the line number and the line will be highlighted.
 
 - Click once: Style **focus**
 - Click twice: Style **git-add**
@@ -57,17 +56,17 @@ If you want to hightlight the line just click the line number, and the line will
 
 ## Examples
 
-Hightlight Style: **Focus**
+Highlight Style: **Focus**
 
-![Hightlight-Style:Focus](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-focus.png)
+![Highlight-Style:Focus](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-focus.png)
 
-Hightlight Style: **Git-Add**
+Highlight Style: **Git-Add**
 
-![Hightlight-Style:Focus](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-add.png)
+![Highlight-Style:Git-Add](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-add.png)
 
-Hightlight Style: **Git-Remove**
+Highlight Style: **Git-Remove**
 
-![Hightlight-Style:Focus](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-remove.png)
+![Highlight-Style:Git-Remove](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-remove.png)
 
 [Material Theme](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme) + [Operator Mono](https://www.typography.com/fonts/operator/styles/operatormono)
 

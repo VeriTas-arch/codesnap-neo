@@ -1,8 +1,17 @@
 # Change Log
 
-All notable changes to the "codesnap" extension will be documented in this file.
+All notable changes to the "codesnap-neo" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+
+## [2.4.1]
+
+- Rename extension identity and configuration namespace to CodeSnap Neo.
+- Migrate extension and webview code to TypeScript.
+- Update the build pipeline and remove Prettier.
+- Fix webview rendering after the TypeScript migration.
+- Fix long-line screenshots without requiring manual width adjustment.
+- Default screenshots to the code window for cleaner PPT usage.
 
 ## [1.3.4]
 

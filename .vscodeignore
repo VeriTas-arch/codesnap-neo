@@ -1,11 +1,16 @@
 .vscode/**
 .vscode-test/**
+node_modules/**
 test/**
+examples/**
 src/**
 webview/src/**
 .gitignore
 tsconfig.json
 tsconfig.webview.json
+eslint.config.js
+tailwind.config.js
+style.css
 vsc-extension-quickstart.md
 **/*.map
 **/.eslintrc.json
