@@ -2,8 +2,6 @@
 
 All notable changes to the "codesnap-neo" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [2.4.1]
 
 - Rename extension identity and configuration namespace to CodeSnap Neo.
