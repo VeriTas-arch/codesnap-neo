@@ -636,10 +636,6 @@ video {
   flex: none;
 }
 
-.resize {
-  resize: both;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -815,7 +811,6 @@ body {
   border-radius: var(--window-border-radius);
   box-shadow: var(--box-shadow);
   overflow: hidden;
-  resize: horizontal;
   width: -moz-max-content;
   width: max-content;
   min-width: 100px;
@@ -845,8 +840,8 @@ body {
 }
 
 #snippet {
-  max-width: 100%;
-  word-break: break-all;
+  max-width: none;
+  word-break: normal;
   color: var(--vscode-editor-foreground);
   background-color: var(--vscode-editor-background);
   font-family: var(--vscode-editor-font-family);
@@ -856,6 +851,9 @@ body {
 
 .line {
   display: flex;
+  width: -moz-max-content;
+  width: max-content;
+  min-width: 100%;
 }
 
 .line-number {
@@ -878,8 +876,13 @@ body {
 
 .line-code {
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  flex-wrap: nowrap;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.line-code span {
+  white-space: pre;
 }
 
 .line-code-bold {

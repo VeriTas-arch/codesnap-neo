@@ -86,25 +86,36 @@ const escapeHtml = (text: string): string =>
         .replace(/</gu, '&lt;')
         .replace(/>/gu, '&gt;');
 
-const getClipboardHtml = (clip: DataTransfer | null): string => {
-    if (!clip) return '<div></div>';
+const getPlainLines = (clip: DataTransfer | null): string[] => {
+    if (!clip) return [''];
+    const text = clip.getData('text/plain').replace(/\r\n?/gu, '\n');
+    return text.split('\n');
+};
+
+const linesToHtml = (lines: string[]): string =>
+    `<div>${lines
+        .map((line) => `<div>${escapeHtml(line)}</div>`)
+        .join('')}</div>`;
+
+const getClipboardHtml = (clip: DataTransfer | null, plainLines: string[]): string => {
+    if (!clip) return linesToHtml(plainLines);
 
     const html = clip.getData('text/html');
     if (html) return html;
-    const text = clip
-        .getData('text/plain')
-        .split('\n')
-        .map((line) => `<div>${escapeHtml(line)}</div>`)
-        .join('');
-    return `<div>${text}</div>`;
+    return linesToHtml(plainLines);
 };
 
 export const pasteCode = (config: WebviewConfig, clipboard: DataTransfer | null): void => {
-    snippetNode.innerHTML = getClipboardHtml(clipboard);
+    const plainLines = getPlainLines(clipboard);
+    snippetNode.innerHTML = getClipboardHtml(clipboard, plainLines);
     const code = $('div', snippetNode) || snippetNode;
     snippetNode.style.fontSize = code.style.fontSize;
     snippetNode.style.lineHeight = code.style.lineHeight;
     snippetNode.innerHTML = code.innerHTML;
+    if ($$(':scope > div', snippetNode).length !== plainLines.length) {
+        snippetNode.innerHTML = linesToHtml(plainLines);
+        snippetNode.innerHTML = ($('div', snippetNode) || snippetNode).innerHTML;
+    }
     stripInitialIndent(snippetNode);
     setupLines(snippetNode, config);
 };

@@ -9,7 +9,7 @@ const getConfig = (): WebviewConfig => {
     const editor = vscode.window.activeTextEditor;
     if (editor) editorSettings.tabSize = editor.options.tabSize;
 
-    const extensionSettings = getSettings('codesnap-plus', [
+    const extensionSettings = getSettings('codesnap-neo', [
         'backgroundColor',
         'boxShadow',
         'containerPadding',
@@ -44,7 +44,7 @@ const getConfig = (): WebviewConfig => {
 const createPanel = async (context: vscode.ExtensionContext): Promise<vscode.WebviewPanel> => {
     const panel = vscode.window.createWebviewPanel(
         'codesnap',
-        'CodeSnap 📸',
+        'CodeSnap Neo 📸',
         { viewColumn: vscode.ViewColumn.Beside, preserveFocus: true },
         {
             enableScripts: true,
@@ -122,6 +122,6 @@ const runCommand = async (context: vscode.ExtensionContext): Promise<void> => {
 
 export const activate = (context: vscode.ExtensionContext): void => {
     context.subscriptions.push(
-        vscode.commands.registerCommand('codesnap-plus.start', () => runCommand(context))
+        vscode.commands.registerCommand('codesnap-neo.start', () => runCommand(context))
     );
 };

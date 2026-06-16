@@ -1,15 +1,15 @@
 {
-    "name": "codesnap-plus",
-    "displayName": "CodeSnap-plus",
+    "name": "codesnap-neo",
+    "displayName": "CodeSnap Neo",
     "description": "📸 Take beautiful screenshots of your code in VS Code! And you can hightlight the line just by click.",
-    "version": "1.4.1",
+    "version": "2.4.1",
     "repository": {
         "type": "git",
-        "url": "https://github.com/huibizhang/CodeSnap-plus"
+        "url": "https://github.com/VeriTas-arch/codesnap-neo"
     },
-    "publisher": "huibizhang",
+    "publisher": "ovolab-veritas",
     "icon": "icon.png",
-    "license": "MIT",
+    "license": "BSD 3-Clause",
     "engines": {
         "vscode": "^1.120.0"
     },
@@ -30,86 +30,86 @@
     "contributes": {
         "commands": [
             {
-                "command": "codesnap-plus.start",
-                "title": "CodeSnap-plus 📸"
+                "command": "codesnap-neo.start",
+                "title": "CodeSnap Neo 📸"
             }
         ],
         "menus": {
             "editor/context": [
                 {
-                    "command": "codesnap-plus.start"
+                    "command": "codesnap-neo.start"
                 }
             ]
         },
         "configuration": {
             "type": "object",
-            "title": "CodeSnap",
+            "title": "CodeSnap Neo",
             "properties": {
-                "codesnap-plus.backgroundColor": {
+                "codesnap-neo.backgroundColor": {
                     "scope": "resource",
                     "type": "string",
                     "default": "#abb8c3",
                     "description": "The background color of the snippet's container"
                 },
-                "codesnap-plus.boxShadow": {
+                "codesnap-neo.boxShadow": {
                     "scope": "resource",
                     "type": "string",
-                    "default": "rgba(0, 0, 0, 0.55) 0px 20px 68px",
+                    "default": "rgba(0, 0, 0, 0) 0px 0px 0px",
                     "description": "The CSS box-shadow for the snippet"
                 },
-                "codesnap-plus.containerPadding": {
+                "codesnap-neo.containerPadding": {
                     "scope": "resource",
                     "type": "string",
                     "default": "3em",
                     "description": "The padding for the snippet's container"
                 },
-                "codesnap-plus.roundedCorners": {
+                "codesnap-neo.roundedCorners": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": true,
                     "description": "Use rounded corners for the window"
                 },
-                "codesnap-plus.showWindowControls": {
+                "codesnap-neo.showWindowControls": {
                     "scope": "resource",
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "Display OS X style window controls"
                 },
-                "codesnap-plus.showWindowTitle": {
+                "codesnap-neo.showWindowTitle": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Display window title with open folder / file name"
                 },
-                "codesnap-plus.showLineNumbers": {
+                "codesnap-neo.showLineNumbers": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": true,
                     "description": "Display line numbers"
                 },
-                "codesnap-plus.realLineNumbers": {
+                "codesnap-neo.realLineNumbers": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Start from the selection's line number instead of 1"
                 },
-                "codesnap-plus.transparentBackground": {
+                "codesnap-neo.transparentBackground": {
                     "scope": "resource",
                     "type": "boolean",
                     "default": false,
                     "description": "Use a transparent background when taking the screenshot"
                 },
-                "codesnap-plus.target": {
+                "codesnap-neo.target": {
                     "scope": "resource",
                     "type": "string",
                     "enum": [
                         "container",
                         "window"
                     ],
-                    "default": "container",
+                    "default": "window",
                     "description": "Take the shot with or without the container"
                 },
-                "codesnap-plus.shutterAction": {
+                "codesnap-neo.shutterAction": {
                     "scope": "resource",
                     "type": "string",
                     "enum": [
@@ -119,7 +119,7 @@
                     "default": "save",
                     "description": "The behavior of the shutter button"
                 },
-                "codesnap-plus.toolMode": {
+                "codesnap-neo.toolMode": {
                     "scope": "resource",
                     "type": "string",
                     "enum": [

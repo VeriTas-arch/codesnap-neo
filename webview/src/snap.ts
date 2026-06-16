@@ -23,10 +23,8 @@ export const cameraFlashAnimation = async (): Promise<void> => {
 };
 
 export const takeSnap = async (config: WebviewConfig): Promise<void> => {
-    windowNode.style.resize = 'none';
-
     try {
-        if (config.transparentBackground || config.target === 'window') {
+        if (config.transparentBackground) {
             setVar('container-background-color', 'transparent');
         }
 
@@ -39,7 +37,7 @@ export const takeSnap = async (config: WebviewConfig): Promise<void> => {
                 $$('#snippet-container, #snippet, .line, .line-code span', node).forEach(
                     (span) => (span.style.width = 'unset')
                 );
-                $$('.line-code', node).forEach((span) => (span.style.width = '100%'));
+                $$('.line-code', node).forEach((span) => (span.style.width = 'max-content'));
             }
         });
 
@@ -57,7 +55,6 @@ export const takeSnap = async (config: WebviewConfig): Promise<void> => {
     } catch (error) {
         reportError(error instanceof Error ? error.message : 'Failed to take screenshot.');
     } finally {
-        windowNode.style.resize = 'horizontal';
         setVar('container-background-color', config.backgroundColor);
     }
 };
