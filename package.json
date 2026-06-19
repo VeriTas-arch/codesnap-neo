@@ -8,7 +8,7 @@
         "url": "https://github.com/VeriTas-arch/codesnap-neo"
     },
     "publisher": "ovolab-veritas",
-    "icon": "icon.png",
+    "icon": "image/icon.png",
     "license": "BSD 3-Clause",
     "engines": {
         "vscode": "^1.120.0"

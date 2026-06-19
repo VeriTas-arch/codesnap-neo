@@ -9,13 +9,12 @@ And you can highlight the line just by clicking the line number.
     - [Features](#features)
     - [Basic Usage Instructions](#basic-usage-instructions)
     - [Highlight Usage Instructions](#highlight-usage-instructions)
-    - [Examples](#examples)
     - [Configuration](#configuration)
     - [Acknowledgements](#acknowledgements)
 
 <!-- /TOC -->
 
-![UI](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/ui.png)
+![UI](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/image/showcase.png)
 
 ## Features
 
@@ -53,32 +52,6 @@ If you want to highlight the line, click the line number and the line will be hi
 - Click twice: Style **git-add**
 - Click thrice: Style **git-remove**
 - Click four times: No hightlight
-
-## Examples
-
-Highlight Style: **Focus**
-
-![Highlight-Style:Focus](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-focus.png)
-
-Highlight Style: **Git-Add**
-
-![Highlight-Style:Git-Add](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-add.png)
-
-Highlight Style: **Git-Remove**
-
-![Highlight-Style:Git-Remove](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/hightlight-remove.png)
-
-[Material Theme](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme) + [Operator Mono](https://www.typography.com/fonts/operator/styles/operatormono)
-
-![Example 1](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/material_operator-mono.png)
-
-[Nord](https://github.com/arcticicestudio/nord-visual-studio-code) + [Cascadia Code](https://github.com/microsoft/cascadia-code)
-
-![Example 2](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/nord_cascadia-code.png)
-
-Monokai + [Fira Code](https://github.com/tonsky/FiraCode)
-
-![Example 3](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/examples/monokai_fira-code.png)
 
 ## Configuration
 

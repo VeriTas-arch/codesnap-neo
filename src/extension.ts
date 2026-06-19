@@ -27,7 +27,7 @@ const getConfig = (): WebviewConfig => {
 const createPanel = async (context: vscode.ExtensionContext): Promise<vscode.WebviewPanel> => {
     const panel = vscode.window.createWebviewPanel(
         'codesnap',
-        'CodeSnap Neo 📸',
+        'CodeSnap Neo',
         { viewColumn: vscode.ViewColumn.Beside, preserveFocus: true },
         {
             enableScripts: true,
