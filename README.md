@@ -14,7 +14,7 @@ And you can highlight the line just by clicking the line number.
 
 <!-- /TOC -->
 
-![UI](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/image/showcase.png)
+![UI](https://raw.githubusercontent.com/veritas-arch/codesnap-neo/main/image/showcase_test.png)
 
 ## Features
 
