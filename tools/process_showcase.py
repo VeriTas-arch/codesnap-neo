@@ -149,7 +149,6 @@ def main() -> None:
     parser.add_argument("--border-color", type=parse_hex_color, default=(112, 126, 142))
     args = parser.parse_args()
 
-
     beautify(
         input_dir,
         output_dir,
