@@ -1,6 +1,7 @@
 .vscode/**
 .vscode-test/**
 node_modules/**
+ref/**
 scripts/**
 test/**
 examples/**

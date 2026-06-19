@@ -2,7 +2,7 @@
     "name": "codesnap-neo",
     "displayName": "CodeSnap Neo",
     "description": "📸 Take beautiful screenshots of your code in VS Code! And you can highlight the line just by clicking.",
-    "version": "2.4.4",
+    "version": "2.4.5",
     "repository": {
         "type": "git",
         "url": "https://github.com/VeriTas-arch/codesnap-neo"
