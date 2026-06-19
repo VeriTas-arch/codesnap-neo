@@ -37,13 +37,13 @@ And you can highlight the line just by clicking the line number.
 
 1. Open the command palette (Ctrl+Shift+P on Windows and Linux, Cmd+Shift+P on OS X) and search for `CodeSnap Neo`.
 2. Select the code you'd like to screenshot.
-3. Click the shutter button to save the screenshot to your disk.
+3. Use **Copy** to place the image on the clipboard, or **Save** to write a PNG file.
 
 **Tips**:
 
 - You can also start CodeSnap by selecting code, right clicking, and clicking CodeSnap
 - If you'd like to bind CodeSnap to a hotkey, open up your keyboard shortcut settings and bind `codesnap-neo.start` to a custom keybinding.
-- If you'd like to copy to clipboard instead of saving, click the image and press the copy keyboard shortcut (defaults are Ctrl+C on Windows and Linux, Cmd+C on OS X), or bind `codesnap-neo.shutterAction` to `copy` in your settings
+- Use the **Copy** button to copy the image to the clipboard, or **Save** to write it to a PNG file.
 
 ## Highlight Usage Instructions
 
@@ -82,31 +82,11 @@ Monokai + [Fira Code](https://github.com/tonsky/FiraCode)
 
 ## Configuration
 
-CodeSnap is highly configurable. Here's a list of settings you can change to tune the way your screenshots look:
-
-**`codesnap-neo.backgroundColor`:** The background color of the snippet's container. Can be any valid CSS color.
-
-**`codesnap-neo.boxShadow`:** The CSS box-shadow for the snippet. Can be any valid CSS box shadow.
-
-**`codesnap-neo.containerPadding`:** The padding for the snippet's container. Can be any valid CSS padding.
-
-**`codesnap-neo.roundedCorners`:** Boolean value to use rounded corners or square corners for the window.
-
-**`codesnap-neo.showWindowControls`:** Boolean value to show or hide OS X style window buttons.
-
-**`codesnap-neo.showWindowTitle`:** Boolean value to show or hide window title `folder_name - file_name`.
+CodeSnap Neo provides two settings for line-number output:
 
 **`codesnap-neo.showLineNumbers`:** Boolean value to show or hide line numbers.
 
 **`codesnap-neo.realLineNumbers`:** Boolean value to start from the real line number of the file instead of 1.
-
-**`codesnap-neo.transparentBackground`:** Boolean value to use a transparent background when taking the screenshot.
-
-**`codesnap-neo.target`:** Either `container` to take the screenshot with the container, or `window` to only take the window.
-
-**`codesnap-neo.shutterAction`:** Either `save` to save the screenshot into a file, or `copy` to copy the screenshot into the clipboard.
-
-**`codesnap-neo.toolMode`:** Either `advaced` to the tools on toolbar, or `simple` to only show the shutter button.
 
 ## Acknowledgements
 

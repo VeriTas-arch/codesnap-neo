@@ -2,32 +2,53 @@ import { $, $$, setVar, calcTextWidth } from './util.js';
 import type { WebviewConfig } from './protocol.js';
 
 const snippetNode = $('#snippet');
-const HIGHLIGHT_CLASSES = ['line-focus', 'git-add', 'git-remove'];
+const HIGHLIGHT_CLASSES = ['line-focus', 'git-add', 'git-remove'] as const;
+export type HighlightMode = (typeof HIGHLIGHT_CLASSES)[number] | null;
 
-const getNextHighlightClass = (lineNode: HTMLElement): string | null => {
-    if (lineNode.classList.contains('line-focus')) return 'git-add';
-    if (lineNode.classList.contains('git-add')) return 'git-remove';
-    if (lineNode.classList.contains('git-remove')) return null;
-    return 'line-focus';
+let highlightMode: HighlightMode = 'line-focus';
+let lastHighlightedLine: number | null = null;
+
+export const setHighlightMode = (mode: HighlightMode): void => {
+    highlightMode = mode;
 };
 
-const applyLineHighlight = (lineNode: HTMLElement, lineNumNode: HTMLElement): void => {
-    const nextClass = getNextHighlightClass(lineNode);
-
+const applyLineHighlight = (
+    lineNode: HTMLElement,
+    lineNumNode: HTMLElement,
+    mode: HighlightMode
+): void => {
     HIGHLIGHT_CLASSES.forEach(className => lineNode.classList.remove(className));
-    if (nextClass) lineNode.classList.add(nextClass);
-    lineNumNode.classList.toggle('!text-white', Boolean(nextClass));
+    if (mode) lineNode.classList.add(mode);
+    lineNumNode.classList.toggle('!text-white', Boolean(mode));
+};
+
+const applyHighlightSelection = (lineIndex: number, useRange: boolean): void => {
+    const lines = $$('.line', snippetNode);
+    const start = useRange && lastHighlightedLine !== null
+        ? Math.min(lastHighlightedLine, lineIndex)
+        : lineIndex;
+    const end = useRange && lastHighlightedLine !== null
+        ? Math.max(lastHighlightedLine, lineIndex)
+        : lineIndex;
+
+    for (let index = start; index <= end; index++) {
+        const lineNode = lines[index];
+        const lineNumNode = $('.line-number', lineNode);
+        applyLineHighlight(lineNode, lineNumNode, highlightMode);
+    }
+
+    lastHighlightedLine = lineIndex;
 };
 
 const createLineNumber = (
-    lineNode: HTMLElement,
+    lineIndex: number,
     lineNumber: number,
     showLineNumbers: boolean
 ): HTMLDivElement => {
     const lineNum = document.createElement('div');
     lineNum.classList.add('line-number');
     lineNum.classList.toggle('hidden', !showLineNumbers);
-    lineNum.onclick = () => applyLineHighlight(lineNode, lineNum);
+    lineNum.onclick = (event) => applyHighlightSelection(lineIndex, event.shiftKey);
     lineNum.textContent = String(lineNumber);
     return lineNum;
 };
@@ -55,12 +76,17 @@ const appendLineCode = (lineCodeDiv: HTMLDivElement, row: HTMLElement): void => 
     lineCodeDiv.appendChild(lineCode);
 };
 
-const renderLine = (row: HTMLElement, lineNumber: number, config: WebviewConfig): void => {
+const renderLine = (
+    row: HTMLElement,
+    lineIndex: number,
+    lineNumber: number,
+    config: WebviewConfig
+): void => {
     const lineNode = document.createElement('div');
     lineNode.classList.add('line');
     row.replaceWith(lineNode);
 
-    lineNode.appendChild(createLineNumber(lineNode, lineNumber, config.showLineNumbers));
+    lineNode.appendChild(createLineNumber(lineIndex, lineNumber, config.showLineNumbers));
 
     const lineCodeDiv = document.createElement('div');
     lineCodeDiv.classList.add('line-code');
@@ -74,7 +100,7 @@ const renderRows = (node: HTMLElement, config: WebviewConfig): void => {
     const rows = $$(':scope > div', node);
     setVar('line-number-width', calcTextWidth(rows.length + config.startLine));
 
-    rows.forEach((row, idx) => renderLine(row, idx + 1 + config.startLine, config));
+    rows.forEach((row, idx) => renderLine(row, idx, idx + 1 + config.startLine, config));
 };
 
 const stripInitialIndent = (node: HTMLElement): void => {
@@ -155,6 +181,7 @@ const normalizeClipboardHtml = (node: HTMLElement, html: string, plainLines: str
 };
 
 export const pasteCode = (config: WebviewConfig, clipboard: DataTransfer | null): void => {
+    lastHighlightedLine = null;
     const plainLines = getPlainLines(clipboard);
     normalizeClipboardHtml(snippetNode, getClipboardHtml(clipboard, plainLines), plainLines);
     stripInitialIndent(snippetNode);

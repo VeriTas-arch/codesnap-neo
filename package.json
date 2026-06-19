@@ -1,7 +1,7 @@
 {
     "name": "codesnap-neo",
     "displayName": "CodeSnap Neo",
-    "description": "📸 Take beautiful screenshots of your code in VS Code! And you can highlight the line just by clicking.",
+    "description": "Take screenshots of code in vscode for presenting.",
     "version": "2.4.5",
     "repository": {
         "type": "git",
@@ -31,7 +31,7 @@
         "commands": [
             {
                 "command": "codesnap-neo.start",
-                "title": "CodeSnap Neo 📸"
+                "title": "CodeSnap Neo"
             }
         ],
         "menus": {
@@ -45,42 +45,6 @@
             "type": "object",
             "title": "CodeSnap Neo",
             "properties": {
-                "codesnap-neo.backgroundColor": {
-                    "scope": "resource",
-                    "type": "string",
-                    "default": "#abb8c3",
-                    "description": "The background color of the snippet's container"
-                },
-                "codesnap-neo.boxShadow": {
-                    "scope": "resource",
-                    "type": "string",
-                    "default": "rgba(0, 0, 0, 0) 0px 0px 0px",
-                    "description": "The CSS box-shadow for the snippet"
-                },
-                "codesnap-neo.containerPadding": {
-                    "scope": "resource",
-                    "type": "string",
-                    "default": "3em",
-                    "description": "The padding for the snippet's container"
-                },
-                "codesnap-neo.roundedCorners": {
-                    "scope": "resource",
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Use rounded corners for the window"
-                },
-                "codesnap-neo.showWindowControls": {
-                    "scope": "resource",
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Display OS X style window controls"
-                },
-                "codesnap-neo.showWindowTitle": {
-                    "scope": "resource",
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Display window title with open folder / file name"
-                },
                 "codesnap-neo.showLineNumbers": {
                     "scope": "resource",
                     "type": "boolean",
@@ -90,44 +54,8 @@
                 "codesnap-neo.realLineNumbers": {
                     "scope": "resource",
                     "type": "boolean",
-                    "default": false,
+                    "default": true,
                     "description": "Start from the selection's line number instead of 1"
-                },
-                "codesnap-neo.transparentBackground": {
-                    "scope": "resource",
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Use a transparent background when taking the screenshot"
-                },
-                "codesnap-neo.target": {
-                    "scope": "resource",
-                    "type": "string",
-                    "enum": [
-                        "container",
-                        "window"
-                    ],
-                    "default": "window",
-                    "description": "Take the shot with or without the container"
-                },
-                "codesnap-neo.shutterAction": {
-                    "scope": "resource",
-                    "type": "string",
-                    "enum": [
-                        "save",
-                        "copy"
-                    ],
-                    "default": "save",
-                    "description": "The behavior of the shutter button"
-                },
-                "codesnap-neo.toolMode": {
-                    "scope": "resource",
-                    "type": "string",
-                    "enum": [
-                        "simple",
-                        "advanced"
-                    ],
-                    "default": "advanced",
-                    "description": "The mode of tool, mode \"simple\" will only show the shutter button"
                 }
             }
         }

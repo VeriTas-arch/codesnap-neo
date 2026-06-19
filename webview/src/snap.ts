@@ -1,13 +1,12 @@
-import { $, $$, redraw, once, setVar } from './util.js';
+import { $, $$, redraw, once } from './util.js';
 import type { DomToImage, VsCodeApi } from './webview.js';
-import type { WebviewConfig } from './protocol.js';
+import type { ExportAction } from './protocol.js';
 
 declare const domtoimage: DomToImage;
 declare function acquireVsCodeApi(): VsCodeApi;
 
 const vscode = acquireVsCodeApi();
 const windowNode = $('#window');
-const snippetContainerNode = $('#snippet-container');
 
 const flashFx = $('#flash-fx');
 
@@ -26,15 +25,9 @@ export const cameraFlashAnimation = async (): Promise<void> => {
     flashFx.style.opacity = '1';
 };
 
-export const takeSnap = async (config: WebviewConfig): Promise<void> => {
+export const takeSnap = async (exportAction: ExportAction): Promise<void> => {
     try {
-        if (config.transparentBackground) {
-            setVar('container-background-color', 'transparent');
-        }
-
-        const target = config.target === 'container' ? snippetContainerNode : windowNode;
-
-        const url = await domtoimage.toPng(target, {
+        const url = await domtoimage.toPng(windowNode, {
             bgColor: 'transparent',
             scale: SNAP_SCALE,
             postProcess: (node: HTMLElement) => {
@@ -46,7 +39,7 @@ export const takeSnap = async (config: WebviewConfig): Promise<void> => {
         });
 
         const data = url.slice(url.indexOf(',') + 1);
-        if (config.shutterAction === 'copy') {
+        if (exportAction === 'copy') {
             const binary = atob(data);
             const array = new Uint8Array(binary.length);
             for (let i = 0; i < binary.length; i++) array[i] = binary.charCodeAt(i);
@@ -54,11 +47,9 @@ export const takeSnap = async (config: WebviewConfig): Promise<void> => {
             await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
             cameraFlashAnimation();
         } else {
-            vscode.postMessage({ type: config.shutterAction, data });
+            vscode.postMessage({ type: 'save', data });
         }
     } catch (error) {
         reportError(error instanceof Error ? error.message : 'Failed to take screenshot.');
-    } finally {
-        setVar('container-background-color', config.backgroundColor);
     }
 };
