@@ -1,7 +1,6 @@
 # CodeSnap Neo
 
-📸 Take beautiful screenshots of your code in VS Code!
-And you can highlight the line just by clicking the line number.
+Take screenshots of code in vscode for presenting in a simplified manner.
 
 <!-- TOC -->
 
@@ -24,7 +23,7 @@ And you can highlight the line just by clicking the line number.
     - git-add
     - git-remove
 
-(For usage, see the **Highlight Usage Instructions**)
+(For usage, see the [**Highlight Usage Instructions**](#highlight-usage-instructions))
 
 - **Original features of CodeSnap**
     - Quickly save screenshots of your code
@@ -40,7 +39,7 @@ And you can highlight the line just by clicking the line number.
 
 **Tips**:
 
-- You can also start CodeSnap by selecting code, right clicking, and clicking CodeSnap
+- You can also start CodeSnap by selecting code, right clicking, and clicking CodeSnap.
 - If you'd like to bind CodeSnap to a hotkey, open up your keyboard shortcut settings and bind `codesnap-neo.start` to a custom keybinding.
 - Use the **Copy** button to copy the image to the clipboard, or **Save** to write it to a PNG file.
 
