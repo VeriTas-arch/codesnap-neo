@@ -2,7 +2,7 @@
     "name": "codesnap-neo",
     "displayName": "CodeSnap Neo",
     "description": "Take screenshots of code in vscode for presenting.",
-    "version": "2.4.5",
+    "version": "2.4.6",
     "repository": {
         "type": "git",
         "url": "https://github.com/VeriTas-arch/codesnap-neo"
@@ -51,7 +51,7 @@
                 "codesnap-neo.realLineNumbers": {
                     "scope": "resource",
                     "type": "boolean",
-                    "default": true,
+                    "default": false,
                     "description": "Start from the selection's line number instead of 1"
                 }
             }
